@@ -11,5 +11,7 @@ rules: {
     "no-console": "off",
     "import/extensions":"off",
     "no-unused-expressions":"off",
-    "no-underscore-dangle":"off"
+    "no-underscore-dangle":"off",
+    "no-return-assign":"off",
+    "consistent-return":"off"
 }

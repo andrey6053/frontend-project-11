@@ -5,7 +5,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-
 const config = {
   entry: './src/js/index.js',
   mode: 'development',
@@ -26,6 +25,12 @@ const config = {
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
   ],
+  resolve: {
+    fallback: {
+      https: require.resolve('https-browserify'),
+      http: require.resolve('stream-http'),
+    },
+  },
   module: {
     rules: [
       {
