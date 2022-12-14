@@ -13,57 +13,6 @@ const render = () => {
   container.innerHTML = html();
 };
 
-function toggleEvent() {
-  const showModal = (e) => {
-    e.preventDefault();
-    const { target } = e;
-    const linkPrevElem = target.previousElementSibling;
-    const modalPost = state.dataMain.posts.filter((post) => post.link === linkPrevElem.href);
-    const { content, title, link } = modalPost[0];
-    watchState.formRssState.modalPost = { content, title, link };
-    watchState.formRssState.isModal = true;
-  };
-  const hideModal = (e) => {
-    e.preventDefault();
-    watchState.formRssState.isModal = false;
-  };
-  const btnShowModal = document.querySelectorAll('[data-bs-target="#modal"]');
-  const btnHideModal = document.querySelectorAll("[data-bs-dismiss='modal']");
-  btnHideModal.forEach((el) => el.removeEventListener('click', hideModal));
-  btnShowModal.forEach((el) => el.removeEventListener('click', showModal));
-  btnHideModal.forEach((el) => el.addEventListener('click', hideModal));
-  btnShowModal.forEach((el) => el.addEventListener('click', showModal));
-}
-
-function renderFeedAndPosts(parsedData, url) {
-  if (!state.formRssState.fids.join(',').includes(url)) {
-    watchState.dataMain.feeds.push(parsedData);
-    watchState.dataMain.posts.push(...parsedData.items);
-    watchState.formRssState.fids.push(url);
-    toggleEvent();
-  } else {
-    const newPosts = state.dataMain.posts.filter((el) => {
-      parsedData.items.map((elem) => el.link !== elem.link);
-    });
-    console.log('Обновление постов');
-    if (newPosts.length !== 0) {
-      watchState.dataMain.posts.push(...newPosts);
-      toggleEvent();
-    }
-  }
-}
-
-function accessDownload() {
-  watchState.formRssState.error = 'validDownloaded';
-  watchState.formRssState.state = 'filling';
-  watchState.formRssState.data.inputValue = '';
-  setTimeout(() => {
-    setTimeout(() => {
-      state.formRssState.fids.map((el) => reqToRss(el));
-    }, 5000);
-  });
-}
-
 function app() {
   render();
   const btnSubmitForm = document.querySelector("[aria-label='add']");
@@ -78,16 +27,15 @@ function app() {
       .then(
         (result) => {
           const urlArr = result.inputValue.split('.');
-          if (urlArr[urlArr.length - 1] !== 'rss') return watchState.formRssState.error = 'invalidUrlRss';
-          if (fids.join(',').includes(result.inputValue)) return watchState.formRssState.error = 'invalid-fids';
+          if (urlArr[urlArr.length - 1] !== 'rss') { watchState.formRssState.error = 'invalidUrlRss'; return; }
+          if (fids.join(',').includes(result.inputValue)) { watchState.formRssState.error = 'invalid-fids'; return; }
           watchState.formRssState.error = 'valid';
           watchState.formRssState.state = 'sended';
           reqToRss(result.inputValue);
         },
-        () => watchState.formRssState.error = 'invalidUrl',
+        () => { watchState.formRssState.error = 'invalidUrl'; },
       );
   });
 }
 
-export { renderFeedAndPosts, accessDownload };
 export default app;

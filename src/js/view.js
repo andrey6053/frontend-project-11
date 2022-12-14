@@ -10,7 +10,7 @@ const errorHandler = (value) => {
     resources,
     debug: false,
   }, (err) => {
-    if (err) console.log(err);
+    if (err) throw new Error(err);
   });
   const input = document.querySelector('.form-control');
   const p = document.querySelector('.feedback');
@@ -111,7 +111,7 @@ export function html() {
     resources,
     debug: false,
   }, (err) => {
-    if (err) console.log(err);
+    if (err) throw new Error(err);
   });
   return `
  <section class="container-fluid bg-dark p-5">
