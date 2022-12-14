@@ -77,8 +77,8 @@ function app() {
     userSchema.validate(state.formRssState.data)
       .then(
         (result) => {
-          const urlArr = result.inputValue.split(".")
-          if (urlArr[urlArr.length-1] !== "rss") return watchState.formRssState.error = "invalidUrlRss";
+          const urlArr = result.inputValue.split('.');
+          if (urlArr[urlArr.length - 1] !== 'rss') return watchState.formRssState.error = 'invalidUrlRss';
           if (fids.join(',').includes(result.inputValue)) return watchState.formRssState.error = 'invalid-fids';
           watchState.formRssState.error = 'valid';
           watchState.formRssState.state = 'sended';

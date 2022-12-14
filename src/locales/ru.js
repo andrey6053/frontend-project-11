@@ -8,7 +8,7 @@ export default {
     accessDown: 'RSS успешно загружена',
     errorExist: 'RSS уже существует',
     errorValid: 'Ссылка должна быть валидным URL',
-    errorUrlRss: "Ресурс не содержит валидный RSS",
+    errorUrlRss: 'Ресурс не содержит валидный RSS',
     errorNetwork: 'Ошибка сети',
   },
 };
