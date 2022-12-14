@@ -1,18 +1,17 @@
 import axios from 'axios';
-import parserRss from './api_parser.js';
-import { watchStateData } from '../src/js/view.js';
+import parserRss from './api_parser';
+import watchState from '../src/js/view';
+import { accessDownload, renderFeedAndPosts } from '../src/js/index';
 
-const reqToRss = (url) => {
-  axios.get(url)
-    .then((data) => {
-      parserRss(data.data)
-        .then(((parsedData) => {
-          watchStateData.dataMain.feeds.push(parsedData);
-          watchStateData.dataMain.posts.push(...parsedData.items);
-        }))
-        .catch((err) => console.log(err));
+const reqToRss = async (url) => {
+  axios.get(`https://allorigins.hexlet.app/get?disableCache=true&charset=utf-8&url=${url}`)
+    .then((response) => {
+      parserRss(response.data.contents)
+        .then((parsedData) => renderFeedAndPosts(parsedData, url))
+        .catch((err) => { watchState.formRssState.error = 'invalidNetwork'; console.log(err); });
     })
-    .catch((err) => console.log(err));
+    .then(() => accessDownload())
+    .catch((err) => { watchState.formRssState.error = 'invalidNetwork'; console.log(err); });
 };
 
 export default reqToRss;

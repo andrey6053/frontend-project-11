@@ -9,9 +9,8 @@ parserOptions:
 ignorePatterns: ["main.js"]
 rules: {
     "no-console": "off",
-    "import/extensions":"off",
-    "no-unused-expressions":"off",
-    "no-underscore-dangle":"off",
     "no-return-assign":"off",
-    "consistent-return":"off"
+    "consistent-return":"off",
+    "import/no-cycle":"off",
+    "array-callback-return":"off"
 }

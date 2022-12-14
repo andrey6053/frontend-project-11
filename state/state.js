@@ -1,13 +1,15 @@
 const state = {
   lng: 'ru',
   formRssState: {
-    valid: '',
+    modalPost: '',
+    isModal: false,
+    error: '',
+    state: 'filling',
     isReq: false,
     data: {
       inputValue: '',
     },
     fids: [],
-    errors: [],
   },
   dataMain: {
     feeds: [],
