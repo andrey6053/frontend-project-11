@@ -19,7 +19,7 @@ function toggleEvent() {
     const { target } = e;
     const linkPrevElem = target.previousElementSibling;
     const modalPost = state.dataMain.posts.filter((post) => post.link === linkPrevElem.href);
-    const { content, title, link} = modalPost[0];
+    const { content, title, link } = modalPost[0];
     watchState.formRssState.modalPost = { content, title, link };
     watchState.formRssState.isModal = true;
   };
@@ -77,6 +77,8 @@ function app() {
     userSchema.validate(state.formRssState.data)
       .then(
         (result) => {
+          const urlArr = result.inputValue.split(".")
+          if (urlArr[urlArr.length-1] !== "rss") return watchState.formRssState.error = "invalidUrlRss";
           if (fids.join(',').includes(result.inputValue)) return watchState.formRssState.error = 'invalid-fids';
           watchState.formRssState.error = 'valid';
           watchState.formRssState.state = 'sended';

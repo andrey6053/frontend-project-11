@@ -5,9 +5,10 @@ export default {
     example: 'Пример: https://ru.hexlet.io/lessons.rss',
     btnAdd: 'Добавить',
     inputRssPlaceholder: 'Ссылка RSS',
-    accessDown: 'Rss успешно загружена',
+    accessDown: 'RSS успешно загружена',
     errorExist: 'RSS уже существует',
     errorValid: 'Ссылка должна быть валидным URL',
+    errorUrlRss: "Ресурс не содержит валидный RSS",
     errorNetwork: 'Ошибка сети',
   },
 };

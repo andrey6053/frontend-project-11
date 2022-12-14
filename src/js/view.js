@@ -18,6 +18,7 @@ const errorHandler = (value) => {
     case ('invalid-fids'): { p.textContent = newInstance.t('errorExist'); input.classList.add('is-invalid'); p.classList.replace('text-success', 'text-danger'); break; }
     case ('invalidUrl'): { p.textContent = newInstance.t('errorValid'); input.classList.add('is-invalid'); p.classList.replace('text-success', 'text-danger'); break; }
     case ('invalidNetwork'): { p.textContent = newInstance.t('errorNetwork'); input.classList.add('is-invalid'); p.classList.replace('text-success', 'text-danger'); break; }
+    case ('invalidUrlRss'): { p.textContent = newInstance.t('errorUrlRss'); input.classList.add('is-invalid'); p.classList.replace('text-success', 'text-danger'); break; }
     case ('valid'): { input.classList.remove('is-invalid'); input.focus(); input.value = ''; p.textContent = ''; break; }
     case ('validDownloaded'): { p.textContent = newInstance.t('accessDown'); input.value = ''; p.classList.replace('text-danger', 'text-success'); break; }
     default: break;
