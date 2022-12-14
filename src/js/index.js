@@ -19,7 +19,7 @@ function toggleEvent() {
     const { target } = e;
     const linkPrevElem = target.previousElementSibling;
     const modalPost = state.dataMain.posts.filter((post) => post.link === linkPrevElem.href);
-    const { content, title, link } = modalPost[0];
+    const { content, title, link} = modalPost[0];
     watchState.formRssState.modalPost = { content, title, link };
     watchState.formRssState.isModal = true;
   };
